@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>SMS Spam Detector</title>
+
+    <style>
+
+        *{
+            box-sizing:border-box;
+        }
+
+        body{
+            margin:0;
+            font-family:Arial, sans-serif;
+            background:#0f172a;
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+            padding:20px;
+        }
+
+        .container{
+            width:100%;
+            max-width:550px;
+            background:#1e293b;
+            padding:30px;
+            border-radius:18px;
+            box-shadow:0 0 25px rgba(0,0,0,0.3);
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:25px;
+            font-size:32px;
+        }
+
+        textarea{
+            width:100%;
+            height:140px;
+            border:none;
+            outline:none;
+            border-radius:12px;
+            padding:15px;
+            font-size:16px;
+            resize:none;
+            background:#f8fafc;
+        }
+
+        button{
+            width:100%;
+            margin-top:18px;
+            padding:14px;
+            border:none;
+            border-radius:12px;
+            background:#2563eb;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.2s;
+        }
+
+        button:hover{
+            background:#1d4ed8;
+        }
+
+        .result{
+            margin-top:25px;
+            padding:18px;
+            border-radius:12px;
+            background:#111827;
+        }
+
+        .spam{
+            color:#ef4444;
+            font-weight:bold;
+        }
+
+        .ham{
+            color:#22c55e;
+            font-weight:bold;
+        }
+
+        p{
+            margin:10px 0 0;
+            font-size:17px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>SMS Spam Detector</h1>
+
+    <form method="POST">
+
+        <textarea
+            name="message"
+            placeholder="Enter your SMS here..."
+            required>{{ message }}</textarea>
+
+        <button type="submit">
+            Detect Spam
+        </button>
+
+    </form>
+
+    {% if prediction %}
+
+    <div class="result">
+
+        <h2>
+            Prediction:
+
+            {% if prediction == "Spam" %}
+
+                <span class="spam">
+                    Spam
+                </span>
+
+            {% else %}
+
+                <span class="ham">
+                    Ham
+                </span>
+
+            {% endif %}
+        </h2>
+
+        <p>
+            Confidence: {{ confidence }}%
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
